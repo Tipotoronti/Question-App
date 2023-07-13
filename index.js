@@ -9,8 +9,7 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const QuizListInDB = ref(database, "QuizDatabase")
 
-const inputFieldEl = document.getElementById("input-field")
-const addButtonEl = document.getElementById("add-button")
+
 const answerListEl = document.getElementById("answer-list-el")
 
 
@@ -21,8 +20,7 @@ onValue(QuizListInDB, function(snapshot) {
     console.log(itemsArray)
     for (let i = 0; i < itemsArray.length; i++) {
         let currentItem = itemsArray[i]
-        let currentItemID = currentItem[0]
-        let currentItemValue = currentItem[1]
+
          appendDataToForm(currentItem)
     }
 })
