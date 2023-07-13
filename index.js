@@ -7,21 +7,20 @@ const appSettings = {
 
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
-const QuisListInDB = ref(database, "QuizDatabase")
+const QuizListInDB = ref(database, "QuizDatabase")
 
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
 const shoppingListEl = document.getElementById("shopping-list-el")
 
 
-let shoppingList = []
+onValue(QuizListInDB, function(snapshot) {
+  
+    let itemsArray = Object.entries(snapshot.val())
+    
+    console.log(itemsArray)
 
-function addToList() {
-    let inputValue = inputFieldEl.value
-    shoppingList.push(inputValue)
-    console.log(shoppingList)
-}
-
+})
 
 
 function render(list) {
