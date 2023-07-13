@@ -11,7 +11,7 @@ const QuizListInDB = ref(database, "QuizDatabase")
 
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
-const shoppingListEl = document.getElementById("shopping-list-el")
+const answerListEl = document.getElementById("answer-list-el")
 
 
 onValue(QuizListInDB, function(snapshot) {
@@ -19,26 +19,23 @@ onValue(QuizListInDB, function(snapshot) {
     let itemsArray = Object.entries(snapshot.val())
     
     console.log(itemsArray)
-
-})
-
-
-function render(list) {
-    let renderedList = ""
-    for (let i = 0; i < list.length; i++) {
-        renderedList += `<li> ${list[i]}</li>`
-        shoppingListEl.innerHTML = renderedList
+    for (let i = 0; i < itemsArray.length; i++) {
+        let currentItem = itemsArray[i]
+        let currentItemID = currentItem[0]
+        let currentItemValue = currentItem[1]
+         appendDataToForm(currentItem)
     }
-}
-
-addButtonEl.addEventListener("click", function() {
-   let inputValue = inputFieldEl.value
-    addToList()
-    inputFieldEl.value = " "
-    render(shoppingList)
-    push(shoppingListInDB, inputValue)
-    
-    
-    // Challenge: Append a new <li> with text content inputValue to the 'shopping-list' <ul>
 })
 
+
+function appendDataToForm(item) {
+    let itemID = item[0]
+    let itemValue = item[1]
+    
+    let newEl = document.createElement("li")
+    
+    newEl.textContent = itemValue
+    
+ 
+    answerListEl.append(newEl)
+}
